@@ -65,6 +65,11 @@ Read [`PROJECT_PROFILE.md`](./PROJECT_PROFILE.md).
 
 This file contains the current recurring-character, environment, voice, CTA, funnel and workflow settings needed to continue the active project in a new chat/profile.
 
+### Recent validated patterns
+Read [`docs/RECENT_VALIDATED_PATTERNS.md`](./docs/RECENT_VALIDATED_PATTERNS.md).
+
+This records recent practical lessons from hydrogen-peroxide, potato-water, baking-soda, five-food-tests, cheesecake, lung-demonstration and digestive-tea productions.
+
 ### Change history
 Read [`CHANGELOG.md`](./CHANGELOG.md).
 
@@ -85,7 +90,9 @@ flow-video-skill/
 │   ├── video-002-pep-tonic-bizarre-hook/
 │   ├── video-003-cheesecake-remodel/
 │   └── video-004-digestive-tea-remodel/
-└── docs/
+├── docs/
+│   └── RECENT_VALIDATED_PATTERNS.md
+└── ...
 ```
 
 ## Production philosophy
