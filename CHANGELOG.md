@@ -1,5 +1,113 @@
 # Changelog
 
+## 0.3.0 — Exact-remodel + scene-lock + micro-action workflow
+
+Validated several additional end-to-end productions using the same recurring outdoor creator, including a cheesecake recipe remodel, a digestive-model tea remodel, black-to-pink anatomy-prop hooks, fixed-strainer pouring and GUIDE-based funnel CTAs.
+
+### Added
+- exact-reference remodel mode for requests such as `same hook`, `same copy`, `same recipe`, `replicate as close as possible`
+- frame-by-frame analysis checklist for pose, object distance, camera height, hand positions, action order and copy clause boundaries
+- strict still-image-first protocol where every still represents the exact first video frame
+- absolute First Frame scene-lock protocol
+- explicit instruction that the provided first frame is the exact physical scene and must not be recreated
+- environment-reference locking for ground, rocks, vegetation, table, lighting, camera angle and camera distance
+- one-continuous-take protocol with no hidden cuts, jump cuts, angle switches or camera teleportation
+- physical action chains such as `egg → open → fall → same bowl → whisk`
+- micro-action decomposition for fragile Flow generations
+- explicit fixed / handheld / receiving-object / moving-content classifications
+- repeated stationary-object constraints to prevent floating props
+- state-transition rules: full spoon → falling ingredient → empty spoon, empty glass → liquid enters → filled glass, etc.
+- one-handed action simplification when the reference uses a casual one-handed move
+- transformation-response timing rules such as `CONTACT = IMMEDIATE CHANGE`
+- final-result deadline rules so visual transformations finish early enough to hold on the payoff
+- crouched ground-level hook protocol with foreground prop close to wide-angle lens
+- direct CTA adaptation rules that remove unrelated Amazon / external-brand instructions
+- digital-product rule: do not invent a physical book/guide when the funnel product is digital and normally hidden
+- camera-distance voice realism rules for outdoor UGC
+- famous-person false-positive workaround: simplify to `Animate the provided starting frame` when identity-heavy language triggers safety filters
+
+### Validated physical-generation lessons
+
+#### Scene continuity
+Generic language such as `same Texas environment` is not always enough. The animation prompt should state that the provided first frame itself is the exact location and should list the major environmental elements that must remain unchanged.
+
+#### Continuous actions
+When a reference has a fluid action, describing it as multiple separate stages can cause Flow to insert visual cuts. Use a single physical chain and aggressively prohibit cuts and instant reframing.
+
+Validated example:
+
+`whole egg → one-handed crack → contents fall into SAME bowl → immediately whisk SAME bowl`
+
+#### Micro-actions
+Separating ingredients into individual 4-second clips significantly improved stability:
+- chia seeds
+- turmeric
+- bitters
+- black pepper
+
+Each clip used one object transfer only.
+
+#### Floating-object fix
+A strainer repeatedly floated when the prompt treated it as a participant in the action.
+
+Successful fix:
+- strainer = STATIC / FIXED
+- strainer already resting securely over the receiving glass
+- nobody touches the strainer
+- glass = STATIC / FIXED on table
+- pot = only handheld object
+- tea = only moving content
+
+#### Transformation timing
+A black-lung demonstration effect initially cleaned too slowly. The improved prompt defined:
+
+`liquid contact → contacted black area becomes pink immediately`
+
+and required the lungs to be mostly clean by second 7–8 rather than at the final frame.
+
+#### Environment drift
+Animation models sometimes replaced the background during a pour. Successful prompts explicitly said:
+- do not recreate location
+- do not reinterpret environment
+- first-frame background is the physical location
+- same ground, rocks, vegetation, table, lighting and camera position
+
+### Video 003 — Outdoor cheesecake remodel
+
+Validated:
+- exact reference structure adapted to recurring outdoor character
+- same recipe order
+- one-handed egg-crack hook
+- no-cut crack → bowl → whisk action
+- honey + vanilla continuation
+- isolated bowl-to-ramekin pour
+- baked cheesecake texture reveal
+- plate-based benefit explanation
+- replacement of original CTA with `GUIDE`
+
+See `examples/video-003-cheesecake-remodel/`.
+
+### Video 004 — Outdoor digestive-tea remodel
+
+Validated:
+- bizarre transparent digestive demonstration model close to lens
+- ground-level crouched creator hook
+- outdoor-environment adaptation while preserving reference composition
+- lemon → chia → turmeric → bitters → black pepper → strain sequence
+- 4-second ingredient micro-actions
+- exact current-pot-state continuity between clips
+- stationary strainer/glass fix
+- finished-tea payoff shot
+- GUIDE CTA replacing the original external-product/Amazon funnel
+
+See `examples/video-004-digestive-tea-remodel/`.
+
+### Project handoff
+
+Added `PROJECT_PROFILE.md` as the canonical handoff file for the current recurring Josh / outdoor / natural-remedy project so a new chat or profile can recover the production setup without rebuilding it from scratch.
+
+---
+
 ## 0.2.0 — Bizarre-hook + dynamic creator-camera workflow
 
 Validated a second end-to-end production using a brighter, more aggressive outdoor UGC style.
