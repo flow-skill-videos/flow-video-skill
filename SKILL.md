@@ -2,9 +2,9 @@
 
 ## Purpose
 
-Turn one or more reference videos into a reusable AI-video production plan for Google Flow / Gemini Omni Flash while preserving the visual DNA of the references without copying a specific person's identity.
+Turn one or more reference videos into a reusable AI-video production plan for Google Flow / Gemini / Veo-style workflows while preserving the visual DNA, timing, physical logic and retention mechanics of the references without copying a specific real person's identity.
 
-This skill is optimized for vertical social video, especially UGC/direct-response formats.
+This skill is optimized for vertical social video, especially UGC/direct-response formats, guided scene-by-scene production, recurring characters, viral reference remodelling and still-image-first image-to-video generation.
 
 ## Operating modes
 
@@ -14,34 +14,82 @@ Use when the user wants one step at a time.
 Rules:
 - Give exactly one production step at a time.
 - Do not jump ahead.
-- After each step, stop and wait for the user to say they are ready or ask for the next step.
-- Explain actions simply and concretely.
+- If the current step is a still image, give only the still-image prompt and wait.
+- If the current step is animation, give only the animation prompt and wait.
 - Never assume the user has completed a step until they confirm it.
+- When the user reports a generation bug, fix only the current prompt unless they explicitly ask for broader changes.
+- Use short completion phrases the user can send back, e.g. `Chia pronta`, `Hook deu certo`, `CTA pronta`.
+- Keep explanations simple and concrete; the prompt itself can be highly detailed.
 
 ### Full-package mode
 Use when the user wants everything at once.
 
 Return:
 1. reference analysis
-2. character setup
-3. voice setup
-4. product reference setup if needed
-5. final script
-6. scene breakdown
-7. image prompt for every scene
-8. video prompt for every scene
-9. exact duration for every scene
-10. continuity rules
-11. camera choreography
-12. editing notes
+2. style profile
+3. character setup
+4. voice setup
+5. product/reference setup if needed
+6. final script
+7. scene breakdown
+8. image prompt for every scene
+9. video prompt for every scene
+10. exact duration for every scene
+11. continuity rules
+12. camera choreography
+13. editing notes
+14. CTA adaptation
 
-### Replicate mode
-Use when the user uploads reference videos and wants a reusable style profile.
+### Replicate / remodel mode
+Use when the user uploads reference videos and asks to replicate, remodel, reproduce, adapt or keep the same hook/copy/recipe.
 
-Extract:
+Extract frame-by-frame:
+- exact hook visual
+- creator pose
+- body level: standing / crouching / leaning / seated
+- object placement
+- object distance to lens
+- hand positions
+- camera height
+- apparent lens / wide-angle behavior
+- camera distance
+- foreground dominance
+- action order
+- physical continuity between actions
+- spoken copy
+- pauses and clause boundaries
+- scene duration
+- cut points
+- ingredient order
+- prop lifecycle
+- final CTA mechanics
+
+Then separate:
+
+**Keep as close as practical:**
+- hook mechanism
+- sequence of actions
+- pacing
+- recipe/order when requested
+- spoken structure/copy when user explicitly wants a close remodel
+- camera logic
+- gesture logic
+
+**Adapt:**
+- creator identity
+- recurring character
+- environment
+- wardrobe when requested
+- product/funnel CTA
+- branded references that do not belong to the new funnel
+
+Do not silently replace a close-remodel request with a looser inspiration-based rewrite.
+
+### Style-profile mode
+Extract reusable structural DNA:
 - persona archetype
 - hook type
-- hook absurdity / contradiction mechanism
+- absurdity / contradiction mechanism
 - camera behavior
 - camera distance and apparent focal length
 - framing
@@ -59,245 +107,434 @@ Extract:
 - caption style
 - editing rhythm
 
-Save the result conceptually as a STYLE PROFILE that can be applied to new products and new characters.
+Save conceptually as a STYLE PROFILE that can be applied to new products and new characters.
 
 ## Mandatory production order
 
-Unless the user explicitly asks for another workflow, use this order:
+Unless the user explicitly asks for another workflow:
 
-1. Analyze reference videos.
-2. Define the STYLE PROFILE.
-3. Define character identity if not already created.
-4. Create/save character reference image(s) if needed.
-5. Select or create persistent voice if needed.
-6. Add character behavior/profile information.
-7. Create product master reference if a product must remain visually consistent.
-8. Write the complete script.
-9. Break the script into Flow-compatible scene durations.
-10. Define camera choreography and visual job for every scene.
-11. Generate one still image for each scene using the character/product references.
-12. Animate each scene from its still image.
-13. Assemble clips with hard cuts unless the reference style requires something else.
-14. Add captions and finishing edits.
-15. Review failures and update this skill.
+1. Analyze reference video frame-by-frame.
+2. Transcribe / reconstruct the copy as closely as the source supports.
+3. Define what stays identical vs what will be adapted.
+4. Define / load the STYLE PROFILE.
+5. Resolve recurring character identity and wardrobe.
+6. Resolve environment reference.
+7. Resolve recurring voice.
+8. Resolve product / CTA destination.
+9. Build scene map and Flow-compatible durations.
+10. Generate the still for Scene 1.
+11. Animate Scene 1.
+12. Wait for user confirmation.
+13. Repeat still → animate → confirm for each scene.
+14. Assemble clips with cuts matching the reference.
+15. Add captions in post unless specifically requested during generation.
+16. Record meaningful new generation lessons in this repository.
 
 If the user has already completed a step, do not repeat it.
 
 ## Language routing
 
-Never infer the production language solely from the language used in chat.
+Never infer production language solely from chat language.
 
 Keep separate:
-- CHAT LANGUAGE = language used to explain steps to the user
-- PRODUCTION LANGUAGE = language spoken in the generated video
-- VOICE ACCENT = accent of the recurring character voice
+- CHAT LANGUAGE
+- PRODUCTION LANGUAGE
+- VOICE ACCENT
 
 Priority:
-1. If the user explicitly specifies the video language, use it.
-2. If the user asks to replicate reference videos and does not request localization, preserve the spoken language of the references by default.
-3. If the references are mixed or unclear, ask one short clarification question.
-4. Never switch to Brazilian Portuguese only because the user is chatting in Portuguese.
-
-For a custom Flow voice, provide a concise Voice Performance prompt and state clearly where it should be pasted. Do not create a voice-profile file unless the user specifically asks for one.
+1. Explicit user instruction.
+2. If remodelling a reference and no localization is requested, preserve the reference's spoken language.
+3. If unclear, ask one short question only if it cannot be inferred from the project profile.
+4. Never switch to Brazilian Portuguese only because chat is in Portuguese.
 
 ## Flow duration rules
 
-For Gemini Omni Flash workflows covered by this skill, choose scene durations only from:
-
+Use only:
 - 4 seconds
 - 6 seconds
 - 8 seconds
 - 10 seconds
 
-Do not force every scene to the maximum duration.
-Choose duration from the spoken line, action complexity and pacing.
+Choose duration from dialogue length + action complexity.
 
-### Default speech budget
+Starting speech budgets:
+- 4 sec: ~8–10 words
+- 6 sec: ~11–15 words
+- 8 sec: ~15–19 words
+- 10 sec: ~20–24 words
 
-Use these as starting ranges, then adjust for the selected voice:
+Validated fast creator voices may exceed these slightly if lip sync still feels natural.
 
-- 4 sec: about 8–10 words
-- 6 sec: about 11–15 words
-- 8 sec: about 15–19 words
-- 10 sec: about 20–24 words
+For complex physical actions, prioritize action stability over stuffing more copy into the clip.
 
-Target roughly 2.0–2.3 words/second for natural direct-response UGC. Prefer fewer words if the scene contains visible physical actions such as pouring, pointing, stirring or handling a product.
+## Scene-job rule
 
-A validated fast creator voice may exceed these starting ranges slightly, but only if the line still fits naturally with clean lip sync. Never cram dialogue only to preserve copy.
-
-## Script rules
-
-Every scene must have one clear job.
-Typical jobs:
-
+Every scene must have one primary job:
 - bizarre visual hook
 - verbal hook
 - misconception
 - problem explanation
 - mechanism
-- curiosity escalation
 - demonstration
-- transition to solution
+- ingredient addition
+- transition
 - product reveal
-- proof
-- anti-hype credibility
+- payoff
+- credibility
 - CTA
 
 Avoid scenes that merely repeat the previous scene.
 
-The first scene should normally begin with action, tension, surprise or a visually unusual object. Do not waste the opening second on a static idle pose.
+## Micro-action decomposition protocol
+
+A major validated improvement is to split fragile physical actions into very small clips.
+
+When the model is likely to confuse objects, do NOT combine many ingredient actions in one generation.
+
+Prefer:
+- 4 sec: one spoon ingredient falls into one pot
+- 4 sec: one pinch falls into one pot
+- 4 sec: one bottle gives one short splash
+- 6 sec: one pour through one fixed strainer
+- 6 sec: one bowl pours into one ramekin
+- 8 sec: one egg crack + continuous whisk if physically simple and validated
+
+Rule:
+> One fragile physical transformation or object transfer per clip whenever possible.
+
+Benefits:
+- fewer duplicates
+- fewer floating objects
+- fewer teleportations
+- better hand continuity
+- easier retries
+- better physical causality
+
+## Still-image-first protocol
+
+For every scene:
+1. Create the exact physical starting state as a still.
+2. Do NOT pre-complete the action in the still unless the reference starts mid-action.
+3. Use the still as First Frame.
+4. Animate only the next simple action.
+
+Typical still state language:
+- `NO turmeric is falling yet.`
+- `The egg is intact.`
+- `The batter is NOT pouring yet.`
+- `The strainer is already resting securely over the glass.`
+
+The still is not a vague concept image. It is the exact first video frame.
+
+## First-frame scene-lock protocol
+
+A major validated failure is the model recreating or replacing the environment during animation.
+
+When environment continuity matters, begin animation prompts with a hard lock:
+
+`The provided first frame is the exact physical scene.`
+
+Then explicitly preserve:
+- same background
+- same ground
+- same rocks / vegetation
+- same table
+- same lighting direction
+- same character position
+- same camera angle
+- same camera distance
+- same props
+
+Use language such as:
+- `Do NOT recreate the location.`
+- `Do NOT reinterpret the environment.`
+- `This must look like the provided still image simply came to life.`
+- `The first-frame background is the physical location for the entire clip.`
+
+If a dedicated environment reference image exists, treat it as the source of truth and say so explicitly.
+
+Do not merely say `same Texas environment`; generic environment wording can cause the model to invent another similar location.
+
+## Continuous-take protocol
+
+For actions that are continuous in the reference, explicitly require ONE physically continuous take.
+
+Use strong constraints:
+- no hard cut
+- no jump cut
+- no hidden cut
+- no match cut
+- no transition
+- no second angle
+- no sudden zoom
+- no camera teleportation
+- no instant reframing
+
+Describe physical action as a chain:
+
+`EGG → OPENS → CONTENTS FALL → SAME BOWL → WHISK`
+
+or
+
+`POT TILTS → LIQUID HITS FIXED STRAINER → FILTERED LIQUID FALLS → SAME GLASS`
+
+Do not describe a continuous action as multiple cinematic scenes; Flow may interpret each clause as a cut.
+
+## Object anchoring and physics
+
+Every action-heavy prompt should classify props as one of:
+- HANDHELD
+- FIXED / STATIONARY
+- RECEIVING OBJECT
+- MOVING CONTENT
+
+Example — straining:
+- pot = handheld
+- strainer = fixed, resting on glass
+- glass = fixed, resting on table
+- tea = moving content
+
+Explicitly state what MUST NOT move.
+
+### Stationary-prop rule
+If an object should remain still, repeat the constraint:
+- `The strainer is STATIC and FIXED.`
+- `Nobody touches the strainer.`
+- `The glass remains physically resting on the table.`
+
+This prevents floating and levitating props.
+
+### Object-count rule
+Use exact counts:
+- exactly one pot
+- exactly one spoon
+- exactly one bowl
+- exactly one ramekin
+- exactly one cup
+- exactly one bottle
+
+For a prop with subparts, define them precisely, e.g. one anatomical model with two connected lung lobes and one trachea.
+
+### State transition rule
+Describe before / during / after:
+- spoon full → powder falls → spoon empty
+- plate full of lemon → lemon falls → plate mostly empty
+- glass empty → tea enters → glass partially filled
+- egg whole → egg opens → no whole egg remains
+
+The same physical object must persist through the entire transition.
+
+## One-handed action simplification
+
+If the reference uses a simple one-handed action, preserve it.
+
+Validated example:
+- hold egg in one hand
+- open/crack above bowl with the same hand
+- contents fall into bowl
+- immediately continue to whisk
+
+Do not over-choreograph simple reference actions. More choreography often creates more cuts and object bugs.
+
+## Transformation-effect protocol
+
+For visual transformations, define the exact causal response.
+
+If the transformation should be immediate:
+
+`CONTACT = IMMEDIATE CHANGE`
+
+Example:
+- liquid touches black coating
+- the contacted area becomes pink immediately
+- the clean trail follows the liquid stream
+
+Do not use slow verbs such as `soften`, `gradually dissolve`, `eventually peel` if the desired reference effect is instant.
+
+Specify:
+- trigger
+- response time
+- direction of progression
+- final state deadline
+
+Example:
+`By second 7–8, both lungs should already be ~90–100% clean so the viewer gets final-result hold time.`
 
 ## High-retention bizarre-hook rule
 
-When the reference style relies on aggressive visual hooks, do NOT default to merely relevant or attractive objects such as a neat spread of ingredients.
+When the reference relies on aggressive visual hooks, do NOT default to ordinary ingredients.
 
-Prefer a visual that creates an immediate "what is that?" reaction while still having a logical bridge to the topic.
+Prefer a visual that creates immediate `what is that?` curiosity while still having a logical bridge.
 
-A strong bizarre hook has three requirements:
+Strong bizarre hooks require:
+1. pattern interrupt
+2. semantic bridge
+3. narrative payoff
 
-1. **Pattern interrupt** — oversized, uncanny, contradictory, unexpected or physically strange visual.
-2. **Semantic bridge** — Scene 2 can explain why that object/action relates to the topic without feeling random.
-3. **Narrative payoff** — the hook naturally leads into the problem, reframe, routine or product later.
-
-Examples of mechanisms:
-- oversized metaphorical body/shape prop
-- bizarre containers representing an internal concept
-- unexpected powder/liquid interaction
-- strange object placed extremely close to camera
+Validated mechanisms:
+- oversized metaphorical body prop
+- anatomical demonstration model
+- transparent digestive model packed with visible material
+- black-to-pink lung demonstration prop
+- unusual powder/liquid interaction
+- strange object placed extremely close to lens
 - contradictory physical demonstration
 
-Do not copy the exact prop or creator identity from a reference video. Rebuild the retention mechanism for the new product.
+For anatomical props:
+- make them clearly props / demonstration models
+- no blood
+- no gore
+- no exposed-real-organ framing
 
-Do not use random weirdness that cannot be explained cleanly within the story.
+## Foreground / crouched-hook protocol
 
-For wellness topics, bizarre anatomy-like props should stay non-gory and clearly metaphorical. Do not use them to imply a diagnosis or guaranteed medical effect.
+When a reference hook uses a strange prop very close to the lens:
+- match the low camera height
+- use slightly wide smartphone perspective
+- let the prop dominate the lower foreground
+- allow the creator's hand to appear larger due to perspective
+- preserve crouched / kneeling pose if structural to the hook
+- keep face visible above / behind the prop
 
-## Hook-to-product bridge
+Do not automatically force the recurring table into a hook if the reference works because the creator is on the ground.
 
-For direct-response UGC with a late product reveal, use this default arc when it fits the references:
+The table can return in later recipe scenes.
 
-1. bizarre hook
-2. explain/reframe the hook
-3. transition away from random fixes or complexity
-4. reveal and demonstrate the product
-5. credibility / simple-value beat
-6. CTA
+## Reference-copy adaptation
 
-The hook prop can remain visible through Scenes 2–3 for continuity, then move to the side and lose prominence once the product is revealed.
+When the user explicitly says `same copy`, `same recipe`, `same hook`, or `replicate as close as possible`:
+- preserve the original clause order
+- preserve ingredient order
+- preserve hook wording as closely as practical
+- preserve action-to-copy synchronization
+- only adapt the portions requested, usually creator, location, product mention and CTA
 
-The product should not appear in the first frame unless the reference style clearly does that.
+Do not unnecessarily rewrite every sentence into a different style.
 
-## Image prompt requirements
+If a source line is unclear, say what is uncertain rather than inventing exact wording.
 
-Every scene image prompt must explicitly include:
+## CTA adaptation protocol
 
-- character reference instruction
-- exact identity-consistency rules
-- wardrobe continuity
-- environment continuity
-- scene-specific action/pose
-- prop continuity
-- product continuity when relevant
-- composition
-- foreground/background hierarchy
-- camera perspective
-- apparent lens / distance when important
-- lighting
-- realism level
-- negative constraints
+When replacing a reference CTA with a funnel CTA:
+- remove unrelated brand / Amazon / profile-search instructions
+- preserve the creator's natural closing rhythm
+- use the user's keyword exactly
+- use one small gesture on the keyword
+- no repeated pointing
+- do not require showing the digital product unless requested
 
-When possible, use the previous scene image as an additional environment/continuity reference.
+Typical structure:
+`If you want more natural remedies like this, comment GUIDE and I’ll send you the full guide.`
 
-For master character and master product references, prefer clean/simple backgrounds so the asset is easy to reuse.
+CTA visual defaults:
+- same environment
+- same creator
+- one existing prop may remain in hand
+- direct eye contact
+- one subtle downward point on keyword
+- no physical guide/book/QR code unless requested
 
-For a recurring bizarre hook prop, preserve its shape, size, texture and location logic across the scenes where it remains visible.
+## Camera choreography
 
-## Dynamic camera choreography
+Do not make every scene identical when the reference changes composition.
 
-Do not treat every scene as the same locked talking-head composition when the references use stronger camera energy.
+Validated patterns:
+- hook: close, wide, dominant foreground prop
+- ingredient scene: medium-close, ingredient above pot
+- pour: camera stays stable with tiny downward emphasis
+- explanation/payoff: glass/food visible at chest or table level
+- CTA: direct eye contact, small emphasis gesture
 
-Define a camera job per scene.
+Camera movement should follow action, not decorate it.
 
-Validated high-retention pattern:
-- Hook: close, slightly wide-angle, dominant foreground object, character leaning toward lens, subtle handheld/push-in.
-- Explanation: character slightly closer, prop still visible, different composition from hook.
-- Transition: tighter face/upper-body framing, subtle lateral shift or push-in.
-- Product reveal: camera follows the physical action with a small tilt or reposition toward hands/glass/product.
-- Credibility: close-medium framing, slight sideways drift and subtle push-in near the key line.
-- CTA: closest framing, restrained final push-in toward face + product.
+Default UGC camera motion:
+- tiny handheld tremor
+- slight horizontal drift
+- slight vertical drift
+- subtle autofocus breathing
+- minor imperfect framing corrections
 
-Rules:
-- camera movement should follow story or physical action
-- prefer subtle handheld motion over cinematic dolly moves
-- vary distance/framing between blocks so the video does not feel frozen
-- slightly wide-angle close perspective can make foreground props feel larger and more surprising
-- outdoor or bright natural-light setups can be used when the reference style relies on high clarity and stronger visual contrast
-- wardrobe changes such as shirtless presentation are optional structural cues only when they fit the character, context and reference style; never treat them as mandatory
+Avoid cinematic dolly moves unless the reference clearly uses them.
 
 ## Full-frame exported-footage rule
 
-A validated failure occurred when "smartphone UGC" was interpreted as showing the scene inside a phone mockup.
+`Smartphone UGC` can be misread as content displayed inside a phone mockup.
 
-When using smartphone/creator-camera language, explicitly state that the model must show only the final exported footage.
+When vulnerable, explicitly prohibit:
+- phone frame
+- smartphone bezel
+- notch
+- status icons
+- app UI
+- screen-within-screen
+- device mockup
+- black borders
+- mobile overlay
 
-Add strong negative constraints when needed:
-- no phone frame
-- no smartphone bezel
-- no notch
-- no status icons
-- no app UI
-- no screen-within-a-screen
-- no device mockup
-- no black borders
-- no mobile overlay
+The output should be final full-frame 9:16 footage.
 
-Do not rely on the phrase "smartphone-style" alone.
+## Image prompt requirements
+
+Every scene image prompt should include:
+- character reference instruction
+- exact wardrobe
+- environment reference / continuity
+- exact first-frame physical state
+- scene-specific pose
+- prop counts
+- prop positions
+- current recipe/product state
+- future objects that must NOT appear yet
+- composition
+- foreground/background hierarchy
+- camera perspective
+- apparent lens/distance when important
+- lighting
+- realism
+- negative constraints
+- explicit success condition
+
+When possible, use the previous successful frame as continuity reference.
 
 ## Video prompt requirements
 
-Every video prompt MUST be ready to copy and paste. Never make the user manually add the dialogue afterward.
-
-Every video prompt must contain:
-
+Every animation prompt must be ready to copy/paste and contain:
 1. exact duration
 2. aspect ratio
-3. visual style
-4. strict character consistency
+3. first-frame / scene lock
+4. character continuity
 5. environment continuity
-6. product/prop continuity
-7. exact physical action
-8. facial performance
-9. camera behavior / choreography
-10. voice identity and tone
-11. exact spoken dialogue
-12. explicit instruction not to paraphrase dialogue
-13. lip-sync requirement
-14. audio ambience
-15. negative constraints
-16. full-frame/no-device-overlay rule when relevant
+6. object counts
+7. fixed vs moving objects
+8. starting state
+9. exact physical action
+10. timing blocks
+11. physical-state transitions
+12. camera behavior
+13. performance
+14. exact dialogue
+15. do-not-paraphrase instruction
+16. voice/audio profile
+17. Foley
+18. negative rules
+19. final state / success condition
 
 ### Dialogue block
+Always include:
 
-Always include a clear block such as:
+`He must say EXACTLY:`
 
-`Josh must say EXACTLY:`
-
-followed by the full line.
-
-Then state:
+Then:
 - do not paraphrase
 - do not add words
 - do not remove words
 - do not repeat words
-- only the intended character speaks
-- finish within the selected duration
-- use accurate natural lip sync
+- only intended character speaks
+- final word must be audible before clip ends
 
-## Voice consistency
+## Voice consistency and distance realism
 
-A recurring character must have a recurring voice identity whenever the platform supports it.
-
-Define:
+Recurring character voice should remain stable:
 - apparent age
 - gender presentation
 - production language
@@ -310,14 +547,28 @@ Define:
 - authority level
 - sales intensity
 
-For organic UGC, default away from announcer-style delivery.
-The character should usually sound like they are speaking to one person, not presenting to a crowd.
+For outdoor UGC, match sound to visible camera distance.
+
+Avoid:
+- studio microphone sound
+- podcast proximity bass
+- heavy radio compression
+- polished announcer delivery
+
+Prefer:
+- natural midrange
+- mild distance attenuation
+- faint outdoor ambience
+- subtle breeze
+- real phone-camera feel
+
+A visually distant creator should not sound like their mouth is 5 cm from a condenser microphone.
 
 ## Character consistency
 
-Treat character identity as a locked asset.
+Treat recurring character identity as a locked asset.
 
-Preserve across scenes:
+Preserve:
 - face
 - age
 - skin tone
@@ -326,13 +577,22 @@ Preserve across scenes:
 - hair color
 - facial hair
 - body proportions
-- recurring wardrobe when continuity requires it
+- recurring wardrobe
 
-Do not silently redesign or beautify the character.
+Do not silently beautify, age-shift or redesign.
+
+### Famous-person false-positive workaround
+If Flow flags a recurring generated character because prompts over-emphasize identity:
+- simplify the animation instruction
+- use `Animate the provided starting frame`
+- preserve visible clothing, props and environment
+- avoid unnecessary `exact identity`, `same face`, `celebrity`, `famous person` language
+
+The first frame already carries the visual identity.
 
 ## Product consistency
 
-If a product is important across multiple scenes, create a master product reference before repeated use.
+If a physical product is important across scenes, create a master product reference.
 
 Preserve:
 - container type
@@ -341,120 +601,115 @@ Preserve:
 - lid
 - label layout
 - colors
-- brand name placement
+- brand-name placement
 
-Avoid generating multiple inconsistent versions of the same product.
-
-During product-demo scenes, explicitly constrain the number of repeated objects when generation is prone to duplication, for example:
-- exactly one product container
-- exactly one scoop
-- exactly one glass
+If the funnel product is digital and the content strategy does not show it, do NOT invent a physical book/product reveal.
 
 ## UGC realism defaults
 
-Unless reference videos indicate otherwise:
-
+Unless reference indicates otherwise:
 - vertical 9:16
 - full-frame exported footage
-- realistic creator-camera perspective
-- medium or medium-close framing
 - natural daylight
 - believable real location
 - subtle camera micro-movement
 - restrained gestures
-- natural blinking and breathing
+- natural blinking/breathing
 - minimal cinematic movement
-- hard cuts between clips
-- no baked-in subtitles during generation
+- hard cuts between independent clips
+- no baked-in subtitles
 
-If the reference style is more aggressive, allow closer framing, slightly wide-angle perspective, brighter outdoor light, stronger foreground objects and more intentional camera-following movement.
+For aggressive hooks, allow:
+- closer framing
+- wide perspective
+- larger foreground props
+- low-angle / ground-level camera
+- brighter outdoor contrast
 
 ## Caption rule
 
-Prefer captions in post-production rather than asking the video model to render them, unless there is a specific reason to bake text into the video.
+Prefer captions in post-production.
 
-If the user already handles captions in CapCut or another editor, do not waste guided-mode steps explaining captions unless asked.
+If user handles captions in CapCut or another editor, do not spend guided-mode steps on captions unless asked.
 
-## Reference analysis rule
+## Wellness / claims
 
-Separate what is structural from what is incidental.
+Do not invent verified medical efficacy.
 
-Structural examples:
-- bizarre visual-hook-first storytelling
-- expert-like persona
-- strong foreground prop
-- close wide-angle creator framing
-- bright outdoor setup
-- camera following physical action
-- 6–8 second scene blocks
-- hard cuts
-- late product reveal
+When remodelling a viral wellness reference, distinguish:
+- visual metaphor / prop
+- recipe demonstration
+- source copy
+- verified medical claim
 
-Incidental examples:
-- exact creator face
-- exact shirt/no-shirt choice
-- exact backyard
-- exact prop from the original reference
-- exact jar shape
+Bizarre anatomy props are demonstration props, not medical proof.
 
-The style profile should preserve the structural DNA while allowing new products, characters, props and environments.
+Do not add new diagnoses or guaranteed outcomes that were not supplied.
 
 ## Iteration protocol
 
-After every generated video, collect observations under:
-
+After meaningful generation tests, classify observations:
 - Worked
 - Failed
 - Keep
 - Change
 - New rule
 
-If an observation repeatedly improves generations, promote it into this SKILL.md.
-
-Do not overwrite useful history; record meaningful changes in CHANGELOG.md.
-
-## Safety and claim quality
-
-For health, wellness, finance or other sensitive commercial topics, avoid inventing medical or guaranteed outcome claims. Prefer neutral language such as personal routine, general support, product use or demonstrable product features unless verified claims are supplied by the user.
-
-A bizarre visual metaphor may illustrate a topic, but it must not be presented as medical proof.
+Promote repeated improvements into this SKILL.md.
+Record history in CHANGELOG.md.
 
 ## Validated baselines
 
 ### Video 001 — Morning Greens
 Validated:
-- one recurring male character
+- recurring character
 - persistent voice
 - six scenes
-- 6/8/8/6/8/6 second timing
-- visual curiosity hook with three containers
-- misconception/reframe
-- simple-routine transition
-- product demonstration
-- anti-hype credibility beat
-- soft CTA
-- still-image-first generation for every scene
-- image-to-video animation per scene
+- 6/8/8/6/8/6 timing
+- visual curiosity hook
+- still-first generation
+- image-to-video animation
 - hard-cut assembly
 
 See `examples/video-001-morning-greens/`.
 
 ### Video 002 — Pep Tonic outdoor bizarre-hook
-Validated improvements:
-- six scenes using 6/8/8/6/8/6 timing
-- bizarre oversized metaphorical prop as the first-frame scroll stopper
+Validated:
+- bizarre oversized hook prop
 - bright outdoor natural light
-- closer, slightly wide-angle creator framing
-- dominant foreground object in the hook
-- character leaning toward lens
-- hook prop preserved through explanation, then moved aside as product enters
+- closer wide creator framing
+- dominant foreground object
 - late product reveal
-- camera follows scoop/pour action
-- framing changes between scenes instead of repeating one locked composition
-- subtle handheld drift and push-ins
-- stronger close CTA framing
-- explicit full-frame/no-phone-overlay constraints
-- exact object-count constraints during product scenes
-- still-image-first generation followed by image-to-video animation
+- camera follows scoop/pour
+- varying framing by narrative block
+- full-frame/no-phone constraints
+- exact object counts
 
 See `examples/video-002-pep-tonic-bizarre-hook/`.
+
+### Video 003 — Outdoor cheesecake recipe remodel
+Validated:
+- close reference-copy preservation
+- one-handed egg crack
+- no-cut crack → bowl → whisk flow
+- separate honey/vanilla step
+- bowl → ramekin pour isolated into its own clip
+- finished-food payoff scenes
+- same outdoor character continuity
+- reference CTA replaced with GUIDE CTA
+
+See `examples/video-003-cheesecake-remodel/`.
+
+### Video 004 — Outdoor digestive-tea reference remodel
+Validated:
+- crouched ground-level bizarre digestive-prop hook
+- prop extremely close to lens
+- outdoor setting adapted while preserving hook composition
+- ingredient-by-ingredient 4-second micro-actions
+- exact current-pot-state continuity
+- fixed strainer + fixed glass + moving pot protocol
+- no floating strainer after stationary-object lock
+- finished-tea payoff
+- direct GUIDE CTA instead of original external-product/Amazon funnel
+
+See `examples/video-004-digestive-tea-remodel/`.
