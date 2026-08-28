@@ -2,7 +2,7 @@
 
 This document records production patterns validated after the earlier Pep Tonic baseline. It is project history and a practical reference for new chats.
 
-Use `SKILL.md` for reusable rules and `PROJECT_PROFILE.md` for the canonical current setup.
+Use `SKILL.md` for reusable rules, `SKILL_PATCH_0_4.md` for the newest Flow safety / U.S.-targeting rules, and `PROJECT_PROFILE.md` for the canonical current setup.
 
 ---
 
@@ -205,12 +205,17 @@ Primary line:
 
 > If you want more natural remedies like this, comment GUIDE and I’ll send you the full guide.
 
+Current U.S.-targeted line:
+
+> If you're in the U.S. and want more natural recipes like this, comment GUIDE and I'll send you the full guide.
+
 Visual:
 - direct eye contact
-- one subtle downward gesture on GUIDE
+- one subtle emphasis gesture on GUIDE
 - no repeated pointing
 - no physical book / ebook / QR code
 - existing food/drink can remain in hand or on table
+- if an existing U.S. flag is visible, keep it in the same physical position
 
 ---
 
@@ -231,3 +236,138 @@ When in doubt:
 4. lock everything else
 5. confirm
 6. continue
+
+---
+
+## 10. Kiwi + baking-soda smoothie remodel
+
+This production validated a new combination of U.S.-audience signaling, strict scene lock and Flow safety recovery.
+
+See `examples/video-005-kiwi-baking-soda-remodel/README.md`.
+
+### Sequence
+- kiwi halves + baking-soda hook
+- kiwi into blender
+- baking-soda microtake
+- squeeze half lemon
+- add one glass of water
+- blend until smooth
+- finished smoothie payoff in blender
+- finished smoothie in one clear serving glass
+- explanation / benefit shot
+- U.S.-targeted GUIDE CTA
+
+### Hook adaptation
+
+A more provocative pharmacy / Big Pharma line repeatedly caused Flow safety trouble.
+
+Validated replacement:
+
+> Put baking soda on kiwis and watch what happens. If you're in the U.S., you've probably never seen this simple kitchen trick.
+
+This preserved an aggressive curiosity hook while avoiding the blocked framing.
+
+### Stronger scene-lock lesson
+
+When the successful First Frame already contained the exact outdoor set, animation became more stable after removing repeated environment descriptions.
+
+Use:
+- first frame = actual physical set
+- locked photographic plate
+- animate only the requested movement
+
+Do not repeatedly re-prompt `Texas / Southwest / reddish earth` if the image already contains the correct set.
+
+### Baking-soda microtake — important safety recovery
+
+The baking-soda-to-blender shot repeatedly produced safety warnings even after identity-heavy wording had been removed.
+
+The warning shifted beyond the older famous-person false positive and included reputation/current-events style blocking.
+
+Important diagnosis:
+The prompt itself was no longer the only likely trigger. The starting asset / face / flag / session state could be involved.
+
+Validated rescue direction:
+- tight recipe insert
+- creator face not dominant / cropped out
+- no unnecessary U.S. flag in that microtake
+- one spoon
+- one small amount of white cooking powder
+- same blender
+- one action only
+- off-camera male voice allowed
+
+Physical chain:
+
+`SPOON TILTS → POWDER FALLS → SAME BLENDER → SPOON ENDS EMPTY → HAND RETREATS`
+
+Validated spoken line:
+
+> Then add a little baking soda.
+
+After the rescue insert succeeded, later scenes returned to the wider established creator environment normally.
+
+### Stop-the-loop lesson
+
+When the same safety warning survives multiple materially different simplified prompts, stop cycling wording.
+
+Change the asset strategy:
+1. strip identity-heavy prompt language
+2. remove nonessential flag / national symbol from the insert
+3. reduce or crop face
+4. use hands + object only
+5. use off-camera voice
+6. if necessary, start a fresh Flow project / session with a clean insert image
+
+The goal is a stable clip, not endless retries of one shot.
+
+### Water / lemon / blender continuity
+
+The following micro-actions worked cleanly as isolated steps:
+- half lemon held above blender → squeeze into same blender
+- one clear glass full of water → one continuous pour → glass ends mostly empty
+- blender lid already on → one control activation → chunks gradually become a smooth green drink
+
+### Finished-drink payoff
+
+A stable serving sequence was:
+1. finished green smoothie remains inside blender while creator explains
+2. next still presents exactly one clear glass of smoothie
+3. creator holds the glass at chest level while speaking
+4. no sip required
+5. free hand can make one small explanatory gesture
+
+This reduces glass duplication and avoids unnecessary object interaction.
+
+### U.S. CTA
+
+Validated final CTA:
+
+> If you're in the U.S. and want more natural recipes like this, comment GUIDE and I'll send you the full guide.
+
+Useful defaults:
+- 8 sec
+- General American accent
+- exact word `GUIDE` pronounced clearly
+- one stronger gesture on GUIDE
+- no written GUIDE text
+- no physical ebook / book / QR code
+- smoothie stays in the same hand
+- no drinking during the CTA
+
+---
+
+## 11. New hierarchy after Video 005
+
+For difficult Flow shots, prioritize:
+
+1. exact reference logic
+2. exact successful First Frame
+3. one primary action
+4. object count and state continuity
+5. voice continuity
+6. creator identity only as strongly as needed
+7. U.S. visual cues only when they do not destabilize generation
+8. asset-level recovery when safety warnings persist
+
+A simple insert that generates and preserves continuity is better than a richer shot that repeatedly fails.
